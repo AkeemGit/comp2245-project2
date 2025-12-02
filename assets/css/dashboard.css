@@ -39,7 +39,7 @@ body {
 }
 
 .add-contact-btn {
-    background-color: #007bff;
+    background-color: #4f46e5;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -54,7 +54,7 @@ body {
 }
 
 .add-contact-btn:hover {
-    background-color: #0056b3;
+    background-color: #3a30e2;
 }
 
 .filter-section {
@@ -96,7 +96,7 @@ body {
 }
 
 .filter-link:hover {
-    color: #007bff;
+    color: #3a30e2;
 }
 
 .filter-link::after {
@@ -106,7 +106,7 @@ body {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #007bff;
+    background-color: #4f46e5;
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -116,7 +116,7 @@ body {
 }
 
 .filter-link.active {
-    color: #007bff;
+    color: #4f46e5;
     font-weight: 600;
 }
 

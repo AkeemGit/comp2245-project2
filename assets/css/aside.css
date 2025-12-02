@@ -4,7 +4,7 @@
   background-color: white;
   color: black;
   font-family: 'Bebas Neue', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  position: sticky;
+  position: fixed;
   top: 60px; 
   padding: 20px;
   display: flex;
@@ -60,9 +60,4 @@
   background-color: #F5F5F5;
 }
 
-.main-content {
-  margin-left: 250px; 
-  padding: 20px;
-  min-height: calc(100vh - 60px);
-  background-color: #ffffff;
-}
+

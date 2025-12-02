@@ -1,3 +1,37 @@
+<?php
+
+include "../config/db_connect.php";
+
+$allowed_filters = ['all', 'sales', 'support', 'assigned'];
+$filter = isset($_GET['filter']) && in_array($_GET['filter'], $allowed_filters) ? $_GET['filter'] : 'all';
+
+try {
+    if ($filter == 'sales') {
+        $stmt = $pdo->prepare("SELECT title, firstname, lastname, email, company, type FROM contacts WHERE type = :type");
+        $stmt->execute([':type' => 'Sales Lead']);
+    } else if ($filter == 'support') {
+        $stmt = $pdo->prepare("SELECT title, firstname, lastname, email, company, type FROM contacts WHERE type = :type");
+        $stmt->execute([':type' => 'Support']);
+    } else if ($filter == 'assigned') {
+        if (isset($_SESSION['user_id'])) {
+            $stmt = $pdo->prepare("SELECT title, firstname, lastname, email, company, type FROM contacts WHERE assigned_to = :user_id");
+            $stmt->execute([':user_id' => $_SESSION['user_id']]);
+        } else {
+            $stmt = $pdo->prepare("SELECT title, firstname, lastname, email, company, type FROM contacts");
+            $stmt->execute();
+        }
+    } else {
+        $stmt = $pdo->prepare("SELECT title, firstname, lastname, email, company, type FROM contacts");
+        $stmt->execute();
+    }
+
+    $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    error_log("Database error: " . $e->getMessage());
+    $contacts = [];
+    $error_message = "Unable to load contacts. Please try again later.";
+}
+?>
 <html lang="en">
 
 <head>
@@ -29,10 +63,10 @@
             <div class="filter-section">
                 <span class="filter-label">Filter By:</span>
                 <div class="filter-options">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="sales">Sales Lead</button>
-                    <button class="filter-btn" data-filter="support">Support</button>
-                    <button class="filter-btn" data-filter="assigned">Assigned to me</button>
+                    <a href="dashboard.php?filter=all" class="filter-link <?php echo $filter == 'all' ? 'active' : ''; ?>">All</a>
+                    <a href="dashboard.php?filter=sales" class="filter-link <?php echo $filter == 'sales' ? 'active' : ''; ?>">Sales Lead</a>
+                    <a href="dashboard.php?filter=support" class="filter-link <?php echo $filter == 'support' ? 'active' : ''; ?>">Support</a>
+                    <a href="dashboard.php?filter=assigned" class="filter-link <?php echo $filter == 'assigned' ? 'active' : ''; ?>">Assigned to me</a>
                 </div>
             </div>
 

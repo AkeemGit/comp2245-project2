@@ -1,6 +1,6 @@
 <aside class="sidebar">
     <nav class="sidebar-menu">
-        <a href="#" class="menu-item">
+        <a href="../pages/dashboard.php" class="menu-item">
             <i class="fa-solid fa-house icon"></i>
             <span class="text">Home</span>
         </a>

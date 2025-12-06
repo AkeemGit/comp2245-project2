@@ -1,0 +1,227 @@
+html,
+body {
+  overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+.layout {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.main-content {
+  flex: 1;
+  padding: 35px 50px;
+  margin-left: 0 !important;
+}
+
+.contact-header {
+  background: #ffffff;
+  padding: 25px 30px;
+  margin-bottom: 25px;
+  border-radius: 4px;
+  border: 1px solid #d1d3d4;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar-circle {
+  width: 60px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-icon {
+  width: 62px;
+  height: 62px;
+  color: #444;
+}
+
+.identity-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.identity-text h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  color: #222;
+}
+
+.identity-text .meta {
+  margin: 2px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  width: auto;
+  flex-shrink: 0;
+  overflow: visible;
+  flex-wrap: nowrap;
+}
+
+.assign-btn,
+.switch-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  color: black;
+}
+
+.assign-btn i,
+.switch-btn i {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.assign-btn {
+  background: #54cd70;
+}
+
+.switch-btn {
+  background: #eaac56;
+}
+
+.assign-btn:hover {
+  background: #218838;
+}
+
+.switch-btn:hover {
+  background: #e39d38;
+}
+
+.info-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 25px;
+  background: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #d1d3d4;
+  margin-bottom: 25px;
+}
+
+.info-col {
+  width: 48%;
+}
+
+.info-col p {
+  margin: 10px 0;
+  font-size: 15px;
+  color: #333;
+  padding-bottom: 30px;
+  line-height: 0.7;
+}
+
+.info-col strong {
+  font-weight: 600;
+  display: block;
+}
+
+.notes-section {
+  background: #ffffff;
+  padding: 40px 25px;
+  border-radius: 4px;
+  border: 1px solid #d1d3d4;
+  margin-bottom: 25px;
+}
+
+.notes-section h3 {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.notes-section h3::before {
+  content: "\f044"; /* Font Awesome pencil icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 10px;
+  color: #555;
+}
+
+.note {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 12px 0;
+}
+
+.note:last-child {
+  border-bottom: none;
+}
+
+.note strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #222;
+}
+
+.note p {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.note small {
+  color: #777;
+  font-size: 12px;
+}
+
+.add-note-box textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 12px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-family: "Poppins", sans-serif;
+}
+
+.add-note-box button {
+  background: #6631f8;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 4px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  float: right;
+}
+
+.add-note-box button:hover {
+  background: #2e89b0;
+}
+
+.note-header {
+  padding: 8px 12px;
+  border-radius: 4px 4px 0 0;
+  border-bottom: none;
+  width: 100%;
+  font-size: 14px;
+  color: #444;
+  font-weight: 500;
+}

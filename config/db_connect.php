@@ -2,7 +2,7 @@
 $host = "localhost";
 $db   = "dolphin_crm";
 $user = "root";
-$pass = "bn5QTEH_k)4fFsHM";
+$pass = "";
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);

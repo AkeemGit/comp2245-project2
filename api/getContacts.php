@@ -9,19 +9,19 @@ $filter = isset($_GET['filter']) && in_array($_GET['filter'], $allowed_filters)
 
 try {
     if ($filter == 'sales') {
-        $stmt = $pdo->prepare("SELECT title, firstname, lastname, email, company, type FROM contacts WHERE type = 'Sales Lead'");
+        $stmt = $pdo->prepare("SELECT id, title, firstname, lastname, email, company, type FROM contacts WHERE type = 'Sales Lead'");
     } else if ($filter == 'support') {
-        $stmt = $pdo->prepare("SELECT title, firstname, lastname, email, company, type FROM contacts WHERE type = 'Support'");
+        $stmt = $pdo->prepare("SELECT id, title, firstname, lastname, email, company, type FROM contacts WHERE type = 'Support'");
     } else if ($filter == 'assigned') {
         if (isset($_SESSION['user_id'])) {
-            $stmt = $pdo->prepare("SELECT title, firstname, lastname, email, company, type FROM contacts WHERE assigned_to = :user_id");
+            $stmt = $pdo->prepare("SELECT id, title, firstname, lastname, email, company, type FROM contacts WHERE assigned_to = :user_id");
             $stmt->execute([':user_id' => $_SESSION['user_id']]);
         } else {
-            $stmt = $pdo->prepare("SELECT title, firstname, lastname, email, company, type FROM contacts");
+            $stmt = $pdo->prepare("SELECT id, title, firstname, lastname, email, company, type FROM contacts");
             $stmt->execute();
         }
     } else {
-        $stmt = $pdo->prepare("SELECT title, firstname, lastname, email, company, type FROM contacts");
+        $stmt = $pdo->prepare("SELECT id, title, firstname, lastname, email, company, type FROM contacts");
     }
 
     $stmt->execute();

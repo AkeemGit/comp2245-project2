@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: white;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertically centers the wrapper content */
+    align-items: center;
+    padding: 20px 0; /* optional spacing on top/bottom */
+}
+
+.center-wrapper {
+    height: calc(100vh - 80px); /* subtract header height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    margin: 0;
+    text-align: center;
+}
+
+.login-container h1 {
+    margin-bottom: 30px;
+    color: black;
+}
+
+.login-container form {
+    padding: 20px 25px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-container input {
+    padding: 12px;
+    border: blue;
+    border: 1px solid grey;
+    font-size: 15px;
+    outline: none;
+}
+
+.login-btn {
+    padding: 12px;
+    background: #4338f5;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background: #3730a3;
+}
+
+.copyright {
+    text-align: center;
+    font-size: 13px;
+    color: grey;
+    margin-top: 20px;
+}

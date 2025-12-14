@@ -13,11 +13,12 @@ $stmt = $pdo->prepare("SELECT * FROM contacts WHERE id = ?");
 $stmt->execute([$contact_id]);
 $contact = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// Checks if contact exists
 if (!$contact) {
     die("Contact not found.");
 }
 
-// Fetch Notes
+// Fetch notes listed under that specific contact 
 $noteStmt = $pdo->prepare("
     SELECT notes.*, users.firstname AS author_first, users.lastname AS author_last
     FROM notes
@@ -47,6 +48,9 @@ if ($contact['created_by']) {
 
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact Details - <?php echo htmlspecialchars($contact['title'] . " " . $contact['firstname'] . " " . $contact['lastname']); ?></title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
         
@@ -58,22 +62,17 @@ if ($contact['created_by']) {
     <body>
         <?php include "../includes/header.php"; ?>
 
-        <div class="layout"> <!-- FIXED WRAPPER -->
-
+        <div class="page-layout">
             <?php include "../includes/aside.php"; ?>
-
-            <div class="main-content">
+            <main class="main-info">
                 <div class="contact-header">
-
                     <div class="contact-header-left">
-
                         <div class="identity">
-
                             <div class="avatar-circle">
                                 <img class="avatar-icon" src="../assets/images/profile.png" alt="Profile">
                             </div>
 
-                            <div class="identity-text">
+                            <div class="identity-text"> <!-- Created on and Updated on textarea -->
                                 <h2><?php echo htmlspecialchars($contact['title'] . " " . $contact['firstname'] . " " . $contact['lastname']); ?></h2>
                                 <p class="meta">Created on <?php echo htmlspecialchars(date('F j, Y', strtotime($contact['created_at']))) . " by " . htmlspecialchars( $created_user['firstname'] . " " . $created_user['lastname']); ?><br></p>
                                 <p class="meta">Updated on <?php echo htmlspecialchars(date('F j, Y', strtotime($contact['updated_at']))); ?></p>
@@ -81,7 +80,7 @@ if ($contact['created_by']) {
                         </div>
                     </div>
 
-                    <div class="action-buttons">
+                    <div class="action-buttons"> <!-- Assign to me and Switch to Sales Lead buttons -->
                         <button class="assign-btn">
                             <i class="fa-solid fa-hand"></i> Assign to me
                         </button>
@@ -91,7 +90,7 @@ if ($contact['created_by']) {
                         </button>
                     </div> 
                 </div>
-                <div class="info-box">
+                <div class="info-box"> <!-- Contact information columns -->
                     <div class="info-col">
                         <p><strong>Email</strong><br><?php echo htmlspecialchars($contact['email']); ?></p>
                         <p><strong>Company</strong><br><?php echo htmlspecialchars($contact['company']); ?></p>
@@ -103,12 +102,11 @@ if ($contact['created_by']) {
                     </div>
                 </div>
 
-                <div class="notes-section">
+                <div class="notes-section"> <!-- Notes section -->
                     <h3>Notes</h3>
                     <br><hr><br>
                     
-                    
-                    <?php if (!empty($notes)): ?>
+                    <div id="notes-list">
                         <?php foreach ($notes as $note): ?>
                             <div class="note">
                                 <strong><?php echo htmlspecialchars($note['author_first'] . " " . $note['author_last']); ?></strong>
@@ -116,22 +114,22 @@ if ($contact['created_by']) {
                                 <small><?php echo htmlspecialchars(date('F j, Y', strtotime($note['created_at']))); ?></small>
                             </div>
                         <?php endforeach; ?>
-                    <?php endif; ?>
+                    </div>
                     
                     <div class="note-header">
                         <p style="margin-bottom: 10px;"> Add a note about <?php echo htmlspecialchars($contact['firstname']); ?></p>
                         <form class="add-note-box" action="../actions/add_note.php" method="POST">
-                            <textarea name="comment" rows="4" placeholder="Enter details here" required></textarea>
+                            <textarea name="comment" rows="4" placeholder="Enter details here" class="comment" required></textarea>
                             <input type="hidden" name="contact_id" value="<?php echo $contact_id; ?>">
-                            <button type="submit">Add Note</button>
+                            <button type="submit" class="add-note-button">Add Note</button>
                         </form>
                     </div>
                     
                 </div>
 
-            </div> <!-- END main-content -->
-
-        </div> <!-- END layout -->
+            </main>
+        </div>
     </body>
+    <script src="../assets/js/notes.js"></script>
 </html>
 

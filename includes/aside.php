@@ -23,3 +23,5 @@
         </a>
     </nav>
 </aside>
+
+<script src="../assets/js/logout.js"></script>

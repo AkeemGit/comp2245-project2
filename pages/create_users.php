@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare(" INSERT INTO users (firstname, lastname, email, password, role, created at) VALUES (?, ?, ?, ?, ?, NOW()) ");
+        $stmt = $pdo->prepare(" INSERT INTO users (firstname, lastname, email, password, role, date) VALUES (?, ?, ?, ?, ?, ) ");
         if ($stmt->execute([$firstname, $lastname, $email, $hashedPassword, $role])) {
             $passed = " Successful creation of user.";
         } else {
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel = "preconnect" href = "https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link rel = "stylesheet" href="../assets/css/dashboard.css">
+
     <link rel = "stylesheet" href="../assets/css/aside.css">
     <link rel = "stylesheet" href="../assets/css/header.css">
 </head>

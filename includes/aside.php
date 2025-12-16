@@ -17,7 +17,7 @@
 
         <hr class="sidebar-divider">
 
-        <a href="#" class="menu-item logout">
+        <a href="../pages/logout.php" class="menu-item logout">
             <i class="fa-solid fa-right-from-bracket icon"></i>
             <span class="text">Logout</span>
         </a>

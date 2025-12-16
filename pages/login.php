@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -16,8 +19,9 @@
             
             <h1>Login</h1>
             <form id="loginForm" method="POST">
-                <input type="email" name="email" placeholder=" Email address" required>
-                <input type="password" name="password" placeholder=" Password" required>
+                <div id="loginError" class="error-message"></div>
+                <input type="email" name="email" placeholder=" Email address">
+                <input type="password" name="password" placeholder=" Password">
                 <button type="submit" class="login-btn">Login</button>
             </form>
         </div>
@@ -28,8 +32,9 @@
     <p class="copyright">Copyright © 2025 Dolphin CRM</p>
     </div>
 
-    <script src="assets\js\login.js"></script>
+    <script src="../assets/js/login.js"></script>
     
 </body>
 
 </html>
+

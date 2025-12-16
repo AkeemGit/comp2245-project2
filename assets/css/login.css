@@ -66,6 +66,12 @@ body {
     background: #3730a3;
 }
 
+#loginError {
+    color: red;
+    margin-bottom: 10px;
+    display: none;
+}
+
 .copyright {
     text-align: center;
     font-size: 13px;

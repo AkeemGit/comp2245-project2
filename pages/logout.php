@@ -7,5 +7,8 @@ if (isset($_SESSION['user_id'])) {
 }
 
 echo json_encode(["status" => "success"]);
+
+header("Location: login.php");
 exit;
+
 ?>

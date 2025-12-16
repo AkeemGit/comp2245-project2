@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("loginForm");
+    let errorMessage = document.querySelector(".error-message");
 
     form.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -8,21 +9,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const email = form.email.value.trim();
         const password = form.password.value.trim();
 
-        // Simple validation
-        if (!email || !password) {
-            alert("Please fill in both fields.");
+        if (!email || !password) { 
+            errorMessage.textContent = "Please fill in both fields.";
+            errorMessage.style.display = "block";
             return;
         }
 
-        // Optional: basic email format check
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(email)) {
-            alert("Please enter a valid email address.");
+            errorMessage.textContent = "Please enter a valid email address.";
+            errorMessage.style.display = "block";
             return;
         }
 
-        // Send AJAX request
-        fetch("pages/login_action.php", {
+        fetch("../includes/login_action.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
@@ -32,7 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.status === "success") {
                 window.location.href = "dashboard.php";
             } else {
-                alert("Invalid email or password.");
+                errorMessage.textContent = "Incorrect email or password.";
+                errorMessage.style.display = "block";
             }
         })
         .catch(err => console.error("Login error:", err));

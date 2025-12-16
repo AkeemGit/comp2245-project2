@@ -7,6 +7,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="../assets/css/login.css">
     <link rel="stylesheet" href="../assets/css/header.css">
 </head>
@@ -16,7 +17,7 @@ session_start();
 
     <div class="center-wrapper">
         <div class="login-container">
-            
+
             <h1>Login</h1>
             <form id="loginForm" method="POST">
                 <div id="loginError" class="error-message"></div>
@@ -29,12 +30,11 @@ session_start();
     </div>
 
     <div>
-    <p class="copyright">Copyright © 2025 Dolphin CRM</p>
+        <p class="copyright">Copyright © 2025 Dolphin CRM</p>
     </div>
 
     <script src="../assets/js/login.js"></script>
-    
+
 </body>
 
 </html>
-

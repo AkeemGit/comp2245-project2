@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function loadContacts(filter = "all") {
     container.innerHTML = "<p>Loading...</p>";
 
-    fetch(`../api/getContacts.php?filter=${filter}`)
+    fetch(`../api/getContacts.php?filter=${encodeURIComponent(filter)}`)
       .then((res) => res.json())
       .then((data) => {
         if (!data.success) {

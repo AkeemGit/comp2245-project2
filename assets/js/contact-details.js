@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const assignBtn = document.getElementById("assignBtn");
   const switchBtn = document.getElementById("switchBtn");
 
   const post = async (url, payload) => {
@@ -9,21 +8,28 @@ document.addEventListener("DOMContentLoaded", () => {
     return res.json();
   };
 
-  if (assignBtn) {
-    assignBtn.addEventListener("click", async () => {
-      const id = assignBtn.dataset.contactId;
-      const data = await post("../api/assign_contact.php", { contact_id: id });
-      if (data.success) location.reload();
-      else alert(data.error || "Could not assign contact.");
-    });
-  }
+  const updateButtonText = (btn, newText) => {
+    const icon = btn.querySelector("i");
+    btn.textContent = "";
+    if (icon) btn.appendChild(icon);
+    btn.append(" " + newText);
+  };
 
   if (switchBtn) {
     switchBtn.addEventListener("click", async () => {
-      const id = switchBtn.dataset.contactId;
-      const data = await post("../api/toggle_contact_type.php", { contact_id: id });
-      if (data.success) location.reload();
-      else alert(data.error || "Could not switch type.");
+      const contactId = switchBtn.dataset.contactId;
+      const data = await post("../api/toggle_contact_type.php", { contact_id: contactId });
+
+      if (data.success) {
+        const newText = (data.type === "Sales Lead") ? "Switch to Support" : "Switch to Sales Lead";
+        updateButtonText(switchBtn, newText);
+
+        // Optional: update contact type somewhere on the page
+        const typeEl = document.getElementById("contact-type"); // add this span in HTML if desired
+        if (typeEl) typeEl.textContent = data.type;
+      } else {
+        alert(data.error || "Could not switch contact type.");
+      }
     });
   }
 });

@@ -1,9 +1,8 @@
-
 <?php
 require '../config/db_connect.php';
 session_start();
 
-// Ensure role is loaded in session (if missing, fetch from DB)
+
 if (isset($_SESSION['user_id']) && (!isset($_SESSION['role']) || !$_SESSION['role'])) {
     $roleStmt = $pdo->prepare("SELECT role FROM users WHERE id = ?");
     $roleStmt->execute([$_SESSION['user_id']]);
@@ -27,6 +26,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,44 +41,45 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-<div class= "container">
-    <?php include "../includes/aside.php"; ?>
-    <main class="main-content">
-        <div class= "toolbar-dashboard">
-            <h1 class="toolbar-title">Users</h1>
-            <button class="add-users-btn" onclick="window.location.href='create_users.php'">
-                <i class="fa-solid fa-plus"></i> Add User
-            </button>
-        </div>
-        <div class="content-box">
-        <div class = "users-table-container">
-            <table class="users-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Created</th>
+    <div class="container">
+        <?php include "../includes/aside.php"; ?>
+        <main class="main-content">
+            <div class="toolbar-dashboard">
+                <h1 class="toolbar-title">Users</h1>
+                <button class="add-users-btn" onclick="window.location.href='create_users.php'">
+                    <i class="fa-solid fa-plus"></i> Add User
+                </button>
+            </div>
+            <div class="content-box">
+                <div class="users-table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Created</th>
 
-                    </tr>
-                
-                
-                </thead>
-                <tbody>
-                    <?php foreach ($users as $user): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($user['firstname']) . " " . htmlspecialchars($user['lastname']) ?></td>
-                            <td><?= htmlspecialchars($user['email']) ?></td>
-                            <td><?= htmlspecialchars($user['role']) ?></td>
-                            <td><?= htmlspecialchars(date("Y-m-d  H:i", strtotime($user['date_registered']))) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
+                            </tr>
 
-            </table>
-        </div>
-        </div>
-    </main>
-</div>
+
+                        </thead>
+                        <tbody>
+                            <?php foreach ($users as $user): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($user['firstname']) . " " . htmlspecialchars($user['lastname']) ?></td>
+                                    <td><?= htmlspecialchars($user['email']) ?></td>
+                                    <td><?= htmlspecialchars($user['role']) ?></td>
+                                    <td><?= htmlspecialchars(date("Y-m-d  H:i", strtotime($user['date_registered']))) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
+
 </html>

@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 include "../config/db_connect.php";
 
@@ -16,7 +15,6 @@ try {
     $users = [];
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,54 +54,74 @@ try {
                 </div>
 
                 <div class="action-button">
-                    <a class="back-btn" href="dashboard.php" style="text-decoration:none; display:inline-flex; align-items:center;">
+                    <a class="back-btn" href="dashboard.php">
                         <i class="fa-solid fa-arrow-left"></i>&nbsp; Back
                     </a>
                 </div>
             </div>
 
-            <div id="formMessage" style="margin: 12px 0;"></div>
+            <div id="formMessage"></div>
 
             <form id="newContactForm" autocomplete="off">
 
+
                 <div class="info-box">
-                    <div class="info-col">
+
+
+                    <div class="info-col" id=title-sec>
                         <label for="name" id="title">Title</label>
-                        <select name="title" required style="width:100%;">
-                            <option value="">Select…</option>
+                        <select name="title" required>
                             <option>Mr</option>
                             <option>Mrs</option>
                             <option>Ms</option>
                             <option>Dr</option>
                             <option>Prof</option>
                         </select>
+                    </div>
 
+                    <div></div>
+
+
+                    <div class="info-col">
                         <label for="firstname" id="firstname">First Name</label>
-                        <input type="text" name="firstname" required maxlength="50" style="width:100%;" />
+                        <input type="text" name="firstname" required maxlength="50">
+                    </div>
 
+                    <div class="info-col">
+                        <label for="lastname" id="lastname">Last Name</label>
+                        <input type="text" name="lastname" required maxlength="50">
+                    </div>
+
+
+                    <div class="info-col">
                         <label for="email" id="email">Email</label>
-                        <input type="email" name="email" required maxlength="100" style="width:100%;" />
+                        <input type="email" name="email" required maxlength="100">
+                    </div>
 
+                    <div class="info-col">
+                        <label for="telephone" id="telephone">Telephone</label>
+                        <input type="text" name="telephone" required maxlength="20">
+                    </div>
+
+
+                    <div class="info-col">
                         <label for="company" id="company">Company</label>
-                        <input type="text" name="company" required maxlength="100" style="width:100%;" />
+                        <input type="text" name="company" required maxlength="100">
                     </div>
 
                     <div class="info-col">
                         <label for="type" id="type">Type</label>
-                        <select name="type" required style="width:100%;">
+                        <select name="type" required>
                             <option value="">Select…</option>
                             <option value="Sales Lead">Sales Lead</option>
                             <option value="Support">Support</option>
                         </select>
+                    </div>
 
-                        <label for="lastname" id="lastname">Last Name</label>
-                        <input type="text" name="lastname" required maxlength="50" style="width:100%;" />
 
-                        <label for="telephone" id="telephone">Telephone</label>
-                        <input type="text" name="telephone" required maxlength="20" style="width:100%;" />
-
+                    <div class="info-col">
                         <label for="assigned_to" id="assigned_to">Assigned To</label>
-                        <select name="assigned_to" required style="width:100%;">
+                        <select name="assigned_to" required>
                             <option value="">Select…</option>
                             <?php foreach ($users as $u): ?>
                                 <option value="<?= (int)$u['id'] ?>">
@@ -112,16 +130,15 @@ try {
                             <?php endforeach; ?>
                         </select>
                     </div>
+
+                    <div></div>
+
                 </div>
 
-                <div class="action-buttons" style="margin-top: 14px;">
+                <div class="action-buttons">
                     <button type="submit" id="saveBtn" class="save-btn">
                         <i class="fa-solid fa-floppy-disk"></i> Save
                     </button>
-
-                    <a href="dashboard.php" class="cancel-btn" style="text-decoration:none; display:inline-flex; align-items:center;">
-                        Cancel
-                    </a>
                 </div>
 
             </form>

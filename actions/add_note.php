@@ -24,8 +24,7 @@ $comment = strip_tags($comment);
 //     die("User not logged in.");
 // }
 
-// Use default user ID for now (change this value as needed)
-$created_by = 1;
+$created_by = $_SESSION['user_id'];
 
 // Insert Note 
 $stmt = $pdo->prepare("
@@ -59,12 +58,27 @@ $noteStmt->execute([$contact_id]);
 $notes = $noteStmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-// Return updated notes HTML
+// Fetch updated contact to get new updated_at timestamp
+$contactStmt = $pdo->prepare("SELECT updated_at FROM contacts WHERE id = ?");
+$contactStmt->execute([$contact_id]);
+$updatedContact = $contactStmt->fetch(PDO::FETCH_ASSOC);
+$updatedDate = date('F j, Y', strtotime($updatedContact['updated_at']));
+
+// Build notes HTML
+$notesHTML = '';
 foreach ($notes as $note) {
-    echo "<div class='note'>
+    $notesHTML .= "<div class='note'>
             <strong>" . htmlspecialchars($note['firstname'] . " " . $note['lastname']) . "</strong>
             <p>" . htmlspecialchars($note['comment']) . "</p>
             <small>" . htmlspecialchars(date('F j, Y', strtotime($note['created_at']))) . "</small>
           </div>";
 }
+
+// Return JSON with notes HTML and updated date
+header('Content-Type: application/json');
+echo json_encode([
+    'success' => true,
+    'notesHTML' => $notesHTML,
+    'updatedDate' => $updatedDate
+]);
 ?>

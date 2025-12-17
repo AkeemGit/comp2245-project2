@@ -35,3 +35,6 @@ CREATE TABLE notes(
     created_by INT(11) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO users (firstname, lastname, password, email, role)
+VALUES ('Raheem', 'Sterling', '$2y$10$fQQtOl0eOu0tnr62An0O2O4lO1yJPVTk5zQONt6OWAzhBZPUcb8su', 'admin@project2.com', 'admin');

@@ -1,23 +1,5 @@
 <?php
 
-/* CODE FOR SHAKYRA SERVER
-$host = "localhost";
-$port = "8889";
-$db   = "dolphin_crm";
-$user = "root";
-$pass = "root";
-
-try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$db;charset=utf8", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo json_encode(['success' => false, 'error' => 'Database connection failed: ' . $e->getMessage()]);
-    exit;
-}
-*/
-
-// CODE FOR EVERYONE ELSE'S SERVER. 
 session_start();
 header('Content-Type: application/json');
 include "../config/db_connect.php";
@@ -32,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-function clean($v) {
+function clean($v)
+{
     return trim((string)$v);
 }
 

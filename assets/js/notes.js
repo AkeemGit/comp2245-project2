@@ -19,7 +19,7 @@ document.querySelector(".add-note-box").addEventListener("submit", function (e) 
           document.querySelector("#notes-list").innerHTML = data.notesHTML;
           document.querySelector(".comment").value = "";
 
-          // Update the "Updated on" date
+          
           const metaElements = document.querySelectorAll(".meta");
           if (metaElements.length > 1) {
             metaElements[1].innerHTML = `Updated on ${data.updatedDate}`;

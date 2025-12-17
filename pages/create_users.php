@@ -1,6 +1,11 @@
 <?php
 require '../config/db_connect.php';
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
 $errors = [];
 $passed = '';
 
@@ -78,38 +83,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif; ?>
 
                 <form method="POST" action="">
-                        <div>
+                    <div>
                         <label for="firstname">First Name:</label>
-                        <input type="text" id="firstname" name="firstname" required>
-                        </div>
+                        <input type="text" id="firstname" name="firstname" required placeholder="Jane">
+                    </div>
 
-                        <div>
+                    <div>
                         <label for="lastname">Last Name:</label>
-                        <input type="text" id="lastname" name="lastname" required>
-                        </div>
+                        <input type="text" id="lastname" name="lastname" required placeholder="Doe">
+                    </div>
 
-                        <div>
+                    <div>
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-                        </div>
+                        <input type="email" id="email" name="email" required placeholder="something@example.com">
+                    </div>
 
-                        <div>
+                    <div>
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" required>
-                        </div>
+                    </div>
 
-                        <div class="full-width">
+                    <div class="full-width">
                         <label for="role">Role:</label>
                         <select id="role" name="role" required>
-                        
-                        <option value="Admin">Admin</option>
-                        <option value="Member">Member</option>
-                        </select>
-                        </div>
 
-                        <div class="button-container">
+                            <option value="Admin">Admin</option>
+                            <option value="Member">Member</option>
+                        </select>
+                    </div>
+
+                    <div class="button-container">
                         <button type="submit">Save</button>
-                        </div>
+                    </div>
                 </form>
             </div>
             </main>

@@ -2,6 +2,19 @@
 session_start();
 include "../config/db_connect.php";
 
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(401);
+
+
+    header('Content-Type: application/json');
+    echo json_encode([
+        "error" => "Unauthorized",
+        "message" => "You must be logged in to access this resource."
+    ]);
+
+    exit();
+}
+
 $allowed_filters = ['all', 'sales', 'support', 'assigned'];
 $filter = isset($_GET['filter']) && in_array($_GET['filter'], $allowed_filters)
     ? $_GET['filter']

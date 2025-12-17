@@ -166,7 +166,7 @@ select {
 }
 
 .notes-section h3::before {
-  content: "\f044"; /* Font Awesome pencil icon */
+  content: "\f044"; 
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   margin-right: 10px;

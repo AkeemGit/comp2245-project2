@@ -1,24 +1,24 @@
 <?php
 require '../config/db_connect.php';
 
-// Validate ID
+
 if (!isset($_GET['id'])) {
     die("Contact ID not provided.");
 }
 
 $contact_id = intval($_GET['id']);
 
-// Fetch Contact
+
 $stmt = $pdo->prepare("SELECT * FROM contacts WHERE id = ?");
 $stmt->execute([$contact_id]);
 $contact = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Checks if contact exists
+
 if (!$contact) {
     die("Contact not found.");
 }
 
-// Fetch notes listed under that specific contact 
+
 $noteStmt = $pdo->prepare("
     SELECT notes.*, users.firstname AS author_first, users.lastname AS author_last
     FROM notes
@@ -29,7 +29,7 @@ $noteStmt = $pdo->prepare("
 $noteStmt->execute([$contact_id]);
 $notes = $noteStmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Fetch assigned_to user details
+
 $assigned_user = null;
 if ($contact['assigned_to']) {
     $userStmt = $pdo->prepare("SELECT firstname, lastname FROM users WHERE id = ?");
@@ -37,7 +37,7 @@ if ($contact['assigned_to']) {
     $assigned_user = $userStmt->fetch(PDO::FETCH_ASSOC);
 }
 
-// Fetch created_by user details
+
 $created_user = null;
 if ($contact['created_by']) {
     $createdUserStmt = $pdo->prepare("SELECT firstname, lastname FROM users WHERE id = ?");
@@ -75,7 +75,7 @@ if ($contact['created_by']) {
                             <img class="avatar-icon" src="../assets/images/profile.png" alt="Profile">
                         </div>
 
-                        <div class="identity-text"> <!-- Created on and Updated on textarea -->
+                        <div class="identity-text">
                             <h2><?php echo htmlspecialchars($contact['title'] . " " . $contact['firstname'] . " " . $contact['lastname']); ?></h2>
                             <p class="meta">Created on <?php echo htmlspecialchars(date('F j, Y', strtotime($contact['created_at']))) . " by " . htmlspecialchars($created_user['firstname'] . " " . $created_user['lastname']); ?><br></p>
                             <p class="meta">Updated on <?php echo htmlspecialchars(date('F j, Y', strtotime($contact['updated_at']))); ?></p>
@@ -83,7 +83,7 @@ if ($contact['created_by']) {
                     </div>
                 </div>
 
-                <div class="action-buttons"> <!-- Assign to me and Switch to Sales Lead buttons -->
+                <div class="action-buttons">
                     <button class="assign-btn" id="assignBtn" data-contact-id="<?php echo $contact_id; ?>">
                         <i class="fa-solid fa-hand"></i> Assign to Me
                     </button>
@@ -94,7 +94,7 @@ if ($contact['created_by']) {
                     </button>
                 </div>
             </div>
-            <div class="info-box"> <!-- Contact information columns -->
+            <div class="info-box">
                 <div class="info-col">
                     <p><strong>Email</strong><br><?php echo htmlspecialchars($contact['email']); ?></p>
                     <p><strong>Company</strong><br><?php echo htmlspecialchars($contact['company']); ?></p>
@@ -114,7 +114,7 @@ if ($contact['created_by']) {
                 </div>
             </div>
 
-            <div class="notes-section"> <!-- Notes section -->
+            <div class="notes-section">
                 <h3>Notes</h3>
                 <br>
                 <hr><br>

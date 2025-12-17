@@ -3,10 +3,10 @@ session_start();
 header('Content-Type: application/json');
 include "../config/db_connect.php";
 
-// Get logged-in user ID
+
 $assigned_user_id = $_SESSION['user_id'] ?? 0;
 
-// Get contact ID from POST
+
 $contact_id = (int)($_POST['contact_id'] ?? 0);
 
 if ($contact_id <= 0) {
@@ -19,7 +19,7 @@ if ($assigned_user_id <= 0) {
   exit;
 }
 
-// Check if contact exists
+
 $contactStmt = $pdo->prepare("SELECT id FROM contacts WHERE id = ?");
 $contactStmt->execute([$contact_id]);
 $contact = $contactStmt->fetch(PDO::FETCH_ASSOC);
@@ -29,11 +29,11 @@ if (!$contact) {
   exit;
 }
 
-// Update contact's assigned_to field
+
 $updateStmt = $pdo->prepare("UPDATE contacts SET assigned_to = ?, updated_at = NOW() WHERE id = ?");
 $updateStmt->execute([$assigned_user_id, $contact_id]);
 
-// Fetch assigned user's name
+
 $userStmt = $pdo->prepare("SELECT firstname, lastname FROM users WHERE id = ?");
 $userStmt->execute([$assigned_user_id]);
 $user = $userStmt->fetch(PDO::FETCH_ASSOC);

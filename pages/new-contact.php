@@ -1,23 +1,5 @@
-
 <?php
 
-/* CODE FOR SERVER TO WORK ON SHAKYRA'S MACHINE
-$host = "localhost";
-$port = "8889";
-$db   = "dolphin_crm";
-$user = "root";
-$pass = "root";
-
-try {
-    $pdo = new PDO("mysql:host=$host;port=$port;dbname=$db;charset=utf8", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
-*/
-
-// CODE FOR SERVER TO WORK ON EVERYONE ELSES MACHINE
 session_start();
 include "../config/db_connect.php";
 
@@ -62,16 +44,16 @@ try {
         <main class="main-info">
 
             <div class="contact-header">
-                    <div class="identity">
-                        <div class="avatar-circle">
-                            <img class="avatar-icon" src="../assets/images/profile.png" alt="Profile">
-                        </div>
-
-                        <div class="header-text">
-                            <h2>Create New Contact</h2>
-                            <p class="meta">Fill out the details below and click Save.</p>
-                        </div>
+                <div class="identity">
+                    <div class="avatar-circle">
+                        <img class="avatar-icon" src="../assets/images/profile.png" alt="Profile">
                     </div>
+
+                    <div class="header-text">
+                        <h2>Create New Contact</h2>
+                        <p class="meta">Fill out the details below and click Save.</p>
+                    </div>
+                </div>
 
                 <div class="action-button">
                     <a class="back-btn" href="dashboard.php" style="text-decoration:none; display:inline-flex; align-items:center;">
@@ -125,10 +107,10 @@ try {
                             <option value="">Select…</option>
                             <?php foreach ($users as $u): ?>
                                 <option value="<?= (int)$u['id'] ?>">
-                                        <?= htmlspecialchars($u['firstname'] . ' ' . $u['lastname']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
+                                    <?= htmlspecialchars($u['firstname'] . ' ' . $u['lastname']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
 

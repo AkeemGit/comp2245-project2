@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "This email format is invalid.";
     } else {
-        // Check if email already exists
+
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->execute([$email]);
         if ($stmt->fetch()) {
@@ -32,71 +32,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $errors[] = " OOPS! Creation of user resulted in an error.";
         }
-    
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title> New User </title>
-    <link rel = "preconnect" href = "https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link rel = "stylesheet" href="../assets/css/dashboard.css">
-    <link rel = "stylesheet" href="../assets/css/aside.css">
-    <link rel = "stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/aside.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
 </head>
 
 <body>
-<?php include "../includes/header.php"; ?>
+    <?php include "../includes/header.php"; ?>
 
-<div class = "layout">
-    <?php include "../includes/aside.php"; ?>
+    <div class="layout">
+        <?php include "../includes/aside.php"; ?>
 
         <div class="main-content">
-            <div class = "page-header">
+            <div class="page-header">
                 <h2> New User </h2>
             </div>
 
             <div class="form-card">
 
-            <?php if (!empty($errors)): ?>
-                <div class="error-messages">
-                    <?php foreach ($errors as $error): ?>
-                        <p><?php echo htmlspecialchars($error); ?></p>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+                <?php if (!empty($errors)): ?>
+                    <div class="error-messages">
+                        <?php foreach ($errors as $error): ?>
+                            <p><?php echo htmlspecialchars($error); ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
 
-            <?php if ($passed): ?>
-                <div class="success-message">
-                    <p><?php echo htmlspecialchars($passed); ?></p>
-                </div>
-            <?php endif; ?>
+                <?php if ($passed): ?>
+                    <div class="success-message">
+                        <p><?php echo htmlspecialchars($passed); ?></p>
+                    </div>
+                <?php endif; ?>
 
-            <form method="POST" action="">
-                <label for="firstname"> First Name: </label>
-                <input type="text" id="firstname" name="firstname" required>
+                <form method="POST" action="">
+                    <label for="firstname"> First Name: </label>
+                    <input type="text" id="firstname" name="firstname" required>
 
-                <label for="lastname"> Last Name: </label>
-                <input type="text" id="lastname" name="lastname" required>
+                    <label for="lastname"> Last Name: </label>
+                    <input type="text" id="lastname" name="lastname" required>
 
-                <label for="email"> Email: </label>
-                <input type="email" id="email" name="email" required>
+                    <label for="email"> Email: </label>
+                    <input type="email" id="email" name="email" required>
 
-                <label for="password"> Password: </label>
-                <input type="password" id="password" name="password" required>
+                    <label for="password"> Password: </label>
+                    <input type="password" id="password" name="password" required>
 
-                <label for="role"> Role: </label>
-                <select id="role" name="role" required>
-                    <option value=""> Select Role </option>
-                    <option value="admin"> Admin </option>
-                    <option value="user"> User </option>
-                </select>
+                    <label for="role"> Role: </label>
+                    <select id="role" name="role" required>
+                        <option value=""> Select Role </option>
+                        <option value="admin"> Admin </option>
+                        <option value="user"> User </option>
+                    </select>
 
-                <button type="submit"> Create User </button>
-            </form>
-        </div>
-    </main>
+                    <button type="submit"> Create User </button>
+                </form>
+            </div>
+            </main>

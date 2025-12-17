@@ -24,8 +24,7 @@ $comment = strip_tags($comment);
 //     die("User not logged in.");
 // }
 
-// Use default user ID for now (change this value as needed)
-$created_by = 1;
+$created_by = $_SESSION['user_id'];
 
 // Insert Note 
 $stmt = $pdo->prepare("

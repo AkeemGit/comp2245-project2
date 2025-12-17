@@ -51,6 +51,7 @@ if ($contact['created_by']) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Contact Details - <?php echo htmlspecialchars($contact['title'] . " " . $contact['firstname'] . " " . $contact['lastname']); ?></title>
+        
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
         
@@ -81,12 +82,13 @@ if ($contact['created_by']) {
                     </div>
 
                     <div class="action-buttons"> <!-- Assign to me and Switch to Sales Lead buttons -->
-                        <button class="assign-btn">
-                            <i class="fa-solid fa-hand"></i> Assign to me
+                        <button class="assign-btn" id="assignBtn" data-contact-id="<?php echo $contact_id; ?>">
+                            <i class="fa-solid fa-hand"></i> Assign to Me 
                         </button>
-
-                        <button class="switch-btn">
-                            <i class="fa-solid fa-right-left"></i> Switch to Sales Lead
+                        
+                        <button class="switch-btn" id="switchBtn" data-contact-id="<?php echo $contact_id; ?>">
+                            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                            <?php echo ($contact['type'] === 'Sales Lead') ? 'Switch to Support' : 'Switch to Sales Lead'; ?>
                         </button>
                     </div> 
                 </div>
@@ -131,5 +133,6 @@ if ($contact['created_by']) {
         </div>
     </body>
     <script src="../assets/js/notes.js"></script>
+    <script src="../assets/js/contact-details.js"></script>
 </html>
 

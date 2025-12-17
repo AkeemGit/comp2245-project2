@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/aside.css">
     <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/create_users.css">
 </head>
 
 <body>
@@ -77,26 +78,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif; ?>
 
                 <form method="POST" action="">
-                    <label for="firstname"> First Name: </label>
-                    <input type="text" id="firstname" name="firstname" required>
+                        <div>
+                        <label for="firstname">First Name:</label>
+                        <input type="text" id="firstname" name="firstname" required>
+                        </div>
 
-                    <label for="lastname"> Last Name: </label>
-                    <input type="text" id="lastname" name="lastname" required>
+                        <div>
+                        <label for="lastname">Last Name:</label>
+                        <input type="text" id="lastname" name="lastname" required>
+                        </div>
 
-                    <label for="email"> Email: </label>
-                    <input type="email" id="email" name="email" required>
+                        <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                        </div>
 
-                    <label for="password"> Password: </label>
-                    <input type="password" id="password" name="password" required>
+                        <div>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                        </div>
 
-                    <label for="role"> Role: </label>
-                    <select id="role" name="role" required>
-                        <option value=""> Select Role </option>
-                        <option value="admin"> Admin </option>
-                        <option value="user"> User </option>
-                    </select>
+                        <div class="full-width">
+                        <label for="role">Role:</label>
+                        <select id="role" name="role" required>
+                        
+                        <option value="Admin">Admin</option>
+                        <option value="Member">Member</option>
+                        </select>
+                        </div>
 
-                    <button type="submit"> Create User </button>
+                        <div class="button-container">
+                        <button type="submit">Save</button>
+                        </div>
                 </form>
             </div>
             </main>

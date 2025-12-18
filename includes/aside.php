@@ -29,7 +29,7 @@ if (!$role && isset($_SESSION['user_id'])) {
             <span class="text">New Contact</span>
         </a>
 
-        <?php if ($role === 'admin'): ?>
+        <?php if ($role === 'Admin'): ?>
             <a href="../pages/users.php" class="menu-item">
                 <i class="fa-solid fa-users icon"></i>
                 <span class="text">Users</span>

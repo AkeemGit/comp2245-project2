@@ -1,13 +1,24 @@
-
 <?php
-$isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-require '../config/db_connect.php';
-
 session_start();
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
+if ($_SESSION['role'] !== 'Admin') {
+    header("Location: dashboard.php");
+    exit();
+}
+
+$isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+require '../config/db_connect.php';
+
+
 
 $errors = [];
 $passed = '';
@@ -57,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($passed) {
             echo "<p class='success-message'>" . htmlspecialchars($passed) . "</p>";
         }
-        exit; 
+        exit;
     }
 }
 ?>
@@ -89,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-card">
                 <div class="messages">
-                     <?php if (!empty($errors)): ?>
+                    <?php if (!empty($errors)): ?>
                         <div class="error-messages">
                             <?php foreach ($errors as $error): ?>
                                 <p><?php echo htmlspecialchars($error); ?></p>
@@ -104,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php endif; ?>
 
                 </div>
-               
+
                 <form method="POST" action="">
                     <div>
                         <label for="firstname">First Name:</label>
@@ -141,7 +152,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </form>
             </div>
             </main>
-    </div>
-    <script src="../assets/js/create_users.js" defer></script>
+        </div>
+
+        <script src="../assets/js/bfcache-guard.js"></script>
+        <script src="../assets/js/create_users.js" defer></script>
+
 </body>
+
 </html>

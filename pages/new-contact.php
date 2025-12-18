@@ -1,11 +1,15 @@
 <?php
 session_start();
-include "../config/db_connect.php";
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
+
+include "../config/db_connect.php";
 
 $users = [];
 try {
@@ -100,7 +104,7 @@ try {
 
                     <div class="info-col">
                         <label for="telephone" id="telephone">Telephone</label>
-                        <input type="text" name="telephone" required maxlength="20" pattern="^\d{3}-\d{3}-\d{4}$" placeholder="XXX-XXX-XXXX">
+                        <input type="text" name="telephone" required maxlength="20" placeholder="XXX-XXX-XXXX">
                     </div>
 
 
@@ -146,6 +150,7 @@ try {
         </main>
     </div>
 
+    <script src="../assets/js/bfcache-guard.js"></script>
     <script src="../assets/js/contacts.js"></script>
 </body>
 

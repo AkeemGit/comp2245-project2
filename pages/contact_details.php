@@ -1,12 +1,16 @@
 <?php
-require '../config/db_connect.php';
-
 session_start();
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
+require '../config/db_connect.php';
 
 $contact_id = intval($_GET['id']);
 
@@ -145,6 +149,7 @@ if ($contact['created_by']) {
         </main>
     </div>
 </body>
+<script src="../assets/js/bfcache-guard.js"></script>
 <script src="../assets/js/notes.js"></script>
 <script src="../assets/js/contact-details.js"></script>
 

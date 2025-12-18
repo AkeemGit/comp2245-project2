@@ -37,4 +37,4 @@ CREATE TABLE notes(
 );
 
 INSERT INTO users (firstname, lastname, password, email, role)
-VALUES ('Raheem', 'Sterling', '$2y$10$fQQtOl0eOu0tnr62An0O2O4lO1yJPVTk5zQONt6OWAzhBZPUcb8su', 'admin@project2.com', 'admin');
+VALUES ('Raheem', 'Sterling', '$2y$10$fQQtOl0eOu0tnr62An0O2O4lO1yJPVTk5zQONt6OWAzhBZPUcb8su', 'admin@project2.com', 'Admin');

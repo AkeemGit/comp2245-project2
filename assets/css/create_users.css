@@ -111,8 +111,8 @@ body {
     margin-bottom: 10px;
 }
 
-.error-messages{
-    width:45%;
+.error-message{
+    width:70%;
     padding: 20px;
     color: red;
     text-align: center;

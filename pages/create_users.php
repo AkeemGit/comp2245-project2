@@ -1,4 +1,6 @@
+
 <?php
+$isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 require '../config/db_connect.php';
 
 session_start();
@@ -26,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "This email format is invalid.";
     } elseif (!preg_match($regex_password, $password)) {
-        $errors[] = " Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number.";}
+        $errors[] = " Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number.";
     } else {
 
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
@@ -46,7 +48,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = " OOPS! Creation of user resulted in an error.";
         }
     }
+    if ($isAjax && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
+        if (!empty($errors)) {
+            foreach ($errors as $error) {
+                echo "<p class='error-message'>" . htmlspecialchars($error) . "</p>";
+            }
+        } elseif ($passed) {
+            echo "<p class='success-message'>" . htmlspecialchars($passed) . "</p>";
+        }
+        exit; 
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -129,5 +142,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             </main>
     </div>
+    <script src="../assets/js/create_users.js" defer></script>
 </body>
 </html>

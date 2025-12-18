@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 function clean($v)
 {
-    return trim((string)$v);
+    return strip_tags(trim((string)$v));
 }
 
 
@@ -45,6 +45,10 @@ $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
 $stmt->execute([$email]);
 if ($stmt->fetch(PDO::FETCH_ASSOC)) {
     $errors[] = " The email that you provided already exists.";
+}
+
+if (!preg_match('/^\d{3}-\d{3}-\d{4}$/', $telephone)) {
+    $errors[] = "Telephone must be in the format XXX-XXX-XXXX.";
 }
 
 if (!empty($errors)) {

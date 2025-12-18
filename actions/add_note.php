@@ -2,6 +2,12 @@
 session_start();
 require __DIR__ . '/../config/db_connect.php';
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../pages/login.php");
+    exit();
+}
+
+
 if (!isset($_POST['contact_id'], $_POST['comment']) || empty(trim($_POST['comment']))) {
     die("Invalid note submission.");
 }

@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id']) && (!isset($_SESSION['role']) || !$_SESSION['rol
 }
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: dashboard.php");
+    header("Location: login.php");
     exit();
 }
 

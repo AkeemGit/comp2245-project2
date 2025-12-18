@@ -10,18 +10,23 @@ if (!isset($_SESSION['user_id'])) {
 $errors = [];
 $passed = '';
 
+$firstname = htmlspecialchars(trim($_POST['firstname'] ?? ''));
+$lastname = htmlspecialchars(trim($_POST['lastname'] ?? ''));
+$email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
+$password = htmlspecialchars(trim($_POST['password'] ?? ''));
+$role = htmlspecialchars(trim($_POST['role'] ?? ''));
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $firstname = trim($_POST['firstname'] ?? '');
-    $lastname = trim($_POST['lastname'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $password = trim($_POST['password'] ?? '');
-    $role = trim($_POST['role'] ?? '');
+
+    $regex_password = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/";
 
     if (empty($firstname) || empty($lastname) || empty($email) || empty($password) || empty($role)) {
         $errors[] = "All fields are required.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "This email format is invalid.";
+    } elseif (!preg_match($regex_password, $password)) {
+        $errors[] = " Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number.";}
     } else {
 
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
@@ -30,16 +35,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = " The email that you provided already exists.";
         }
     }
+
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare(" INSERT INTO users (firstname, lastname, email, password, role, date) VALUES (?, ?, ?, ?, ?, ) ");
+        $stmt = $pdo->prepare(" INSERT INTO users (firstname, lastname, email, password, role) VALUES (?, ?, ?, ?, ? ) ");
+
         if ($stmt->execute([$firstname, $lastname, $email, $hashedPassword, $role])) {
             $passed = " Successful creation of user.";
         } else {
             $errors[] = " OOPS! Creation of user resulted in an error.";
         }
     }
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
+
     <link rel="stylesheet" href="../assets/css/aside.css">
     <link rel="stylesheet" href="../assets/css/header.css">
     <link rel="stylesheet" href="../assets/css/create_users.css">
@@ -68,21 +75,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="form-card">
+                <div class="messages">
+                     <?php if (!empty($errors)): ?>
+                        <div class="error-messages">
+                            <?php foreach ($errors as $error): ?>
+                                <p><?php echo htmlspecialchars($error); ?></p>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
 
-                <?php if (!empty($errors)): ?>
-                    <div class="error-messages">
-                        <?php foreach ($errors as $error): ?>
-                            <p><?php echo htmlspecialchars($error); ?></p>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
+                    <?php if ($passed): ?>
+                        <div class="success-message">
+                            <p><?php echo htmlspecialchars($passed); ?></p>
+                        </div>
+                    <?php endif; ?>
 
-                <?php if ($passed): ?>
-                    <div class="success-message">
-                        <p><?php echo htmlspecialchars($passed); ?></p>
-                    </div>
-                <?php endif; ?>
-
+                </div>
+               
                 <form method="POST" action="">
                     <div>
                         <label for="firstname">First Name:</label>
@@ -119,3 +128,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </form>
             </div>
             </main>
+    </div>
+</body>
+</html>

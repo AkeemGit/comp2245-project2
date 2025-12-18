@@ -84,23 +84,23 @@ try {
 
                     <div class="info-col">
                         <label for="firstname" id="firstname">First Name</label>
-                        <input type="text" name="firstname" required maxlength="50">
+                        <input type="text" name="firstname" required maxlength="50" placeholder="Jane">
                     </div>
 
                     <div class="info-col">
                         <label for="lastname" id="lastname">Last Name</label>
-                        <input type="text" name="lastname" required maxlength="50">
+                        <input type="text" name="lastname" required maxlength="50" placeholder="Doe">
                     </div>
 
 
                     <div class="info-col">
                         <label for="email" id="email">Email</label>
-                        <input type="email" name="email" required maxlength="100">
+                        <input type="email" name="email" required maxlength="100" placeholder="jane@example.com">
                     </div>
 
                     <div class="info-col">
                         <label for="telephone" id="telephone">Telephone</label>
-                        <input type="text" name="telephone" required maxlength="20">
+                        <input type="text" name="telephone" required maxlength="20" pattern="^\d{3}-\d{3}-\d{4}$" placeholder="XXX-XXX-XXXX">
                     </div>
 
 

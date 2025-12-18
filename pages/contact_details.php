@@ -1,9 +1,11 @@
 <?php
 require '../config/db_connect.php';
 
+session_start();
 
-if (!isset($_GET['id'])) {
-    die("Contact ID not provided.");
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
 }
 
 $contact_id = intval($_GET['id']);

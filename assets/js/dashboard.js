@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             return `
                         <tr>
-                            <td>${contact.title}. ${contact.firstname} ${contact.lastname}</td>
+                            <td><a href="contact_details.php?id=${contact.id}" class="view-link">${contact.title}. ${contact.firstname} ${contact.lastname}</a></td>
                             <td>${contact.email}</td>
                             <td>${contact.company}</td>
                             <td>

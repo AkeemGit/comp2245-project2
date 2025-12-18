@@ -41,10 +41,18 @@ if ($company === '') $errors[] = "Company is required";
 if ($type !== 'Sales Lead' && $type !== 'Support') $errors[] = "Type must be Sales Lead or Support";
 if ($assigned_to <= 0) $errors[] = "Assigned To is required";
 
+$stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+$stmt->execute([$email]);
+if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+    $errors[] = " The email that you provided already exists.";
+}
+
 if (!empty($errors)) {
     echo json_encode(['success' => false, 'error' => implode(". ", $errors)]);
     exit;
 }
+
+
 
 try {
     $sql = "INSERT INTO contacts

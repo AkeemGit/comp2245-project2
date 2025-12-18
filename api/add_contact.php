@@ -1,13 +1,20 @@
 <?php
 
 session_start();
-header('Content-Type: application/json');
-include "../config/db_connect.php";
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
 if (!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'error' => 'Unauthorized']);
     exit;
 }
+
+header('Content-Type: application/json');
+
+include "../config/db_connect.php";
+
+
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['success' => false, 'error' => 'Invalid request method']);

@@ -1,7 +1,16 @@
 <?php
-require '../config/db_connect.php';
 session_start();
 
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+require '../config/db_connect.php';
 
 if (isset($_SESSION['user_id']) && (!isset($_SESSION['role']) || !$_SESSION['role'])) {
     $roleStmt = $pdo->prepare("SELECT role FROM users WHERE id = ?");
@@ -12,8 +21,8 @@ if (isset($_SESSION['user_id']) && (!isset($_SESSION['role']) || !$_SESSION['rol
     }
 }
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Admin') {
-    header("Location: login.php");
+if ($_SESSION['role'] !== 'Admin') {
+    header("Location: dashboard.php");
     exit();
 }
 
@@ -80,6 +89,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </main>
     </div>
+    <script src="../assets/js/bfcache-guard.js"></script>
 </body>
 
 </html>

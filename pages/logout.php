@@ -1,14 +1,12 @@
 <?php
 session_start();
 
-if (isset($_SESSION['user_id'])) {
-    session_unset();
-    session_destroy();
-}
 
-echo json_encode(["status" => "success"]);
+$_SESSION = [];
+session_destroy();
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
 
 header("Location: login.php");
 exit;
-
-?>
